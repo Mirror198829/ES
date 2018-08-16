@@ -78,3 +78,5 @@ console.log('调用promise.all结束')
 调用promise.all结束
 all：我是promise.all中reject的结果
  ```
+ ***
+ ### 任务链
