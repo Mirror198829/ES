@@ -80,3 +80,27 @@ all：我是promise.all中reject的结果
  ```
  ***
  ### 任务链
+ ``` javascript
+new Promise((resolve,reject) => {
+  resolve()
+}).then(
+  ()=>{
+    console.log(1)
+  },
+  ()=>{
+    console.log(2)
+  }
+).then(
+  ()=>{
+    console.log(3)
+  },
+  ()=>{
+    console.log(4)
+  }
+)
+ ```
+ then函数执行后继续执行then……  
+ then函数执行后会返回一个新的Promise对象
+ * 如果第1个then没有传入处理函数：返回一个继承了上一个处理状态的Promise对象
+ * 如果第1个then传入函数：默认返回一个fulfilled/resolved状态的Promise对象
+ * 如果第1个then传入函数:通过处理函数显示的return一个新的promise对象
