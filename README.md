@@ -50,4 +50,31 @@ console.log('调用promise结束')
  
  -- 当其中一个被rejected，Promise.all的状态就会变成rejected  
  -- 第一个被rejected实例的返回值会传递给回调函数
- 
+ ## promise.all示例
+ ``` javascript
+ function loadNum(num,time){
+  let numRes = new Promise((resolve,reject) => {
+  setTimeout(() => {
+    if(num > 0){
+      resolve('all：我是promise.all中resolve的结果')
+    }else{
+      reject('all：我是promise.all中reject的结果')
+    }
+  },time)
+  })
+  return numRes
+}
+console.log('调用promise.all开始')
+let allDone = Promise.all([loadNum(2,2000),loadNum(0,5000)])
+allDone.then(res => {
+  console.log(res)
+}).catch(error=>{
+  console.error(error)
+})
+console.log('调用promise.all结束')
+
+//执行结果：
+调用promise.all开始
+调用promise.all结束
+all：我是promise.all中reject的结果
+ ```
