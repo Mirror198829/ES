@@ -103,4 +103,31 @@ new Promise((resolve,reject) => {
  then函数执行后会返回一个新的Promise对象
  * 如果第1个then没有传入处理函数：返回一个继承了上一个处理状态的Promise对象
  * 如果第1个then传入函数：默认返回一个fulfilled/resolved状态的Promise对象
- * 如果第1个then传入函数:通过处理函数显示的return一个新的promise对象
+ * 如果第1个then传入函数:手动处理 ，通过处理函数显示的return一个新的promise对象
+ #### 手动传值示例
+ ``` javascript
+ new Promise((resolve,reject) => {
+  reject()
+}).then(
+  ()=>{
+    console.log(1)
+  },
+  ()=>{
+    console.log(2)
+    return newPromise((resolve,reject)=>{
+      reject()
+    })
+  }
+).then(
+  ()=>{
+    console.log(3)
+  },
+  ()=>{
+    console.log(4)
+  }
+)
+
+//执行结果：
+2
+4
+ ```
