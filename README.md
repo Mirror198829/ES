@@ -105,7 +105,6 @@ new Promise((resolve,reject) => {
  * 如果第1个then传入函数：默认返回一个fulfilled/resolved状态的Promise对象
  * 如果第1个then传入函数:手动处理 ，通过处理函数显示的return一个新的promise对象
  
- <span style="color:'red'">问题:</span>不易中途中止链式执行。即：当开始执行promise.then，无论成功与否都会继续链式执行，但当失败中间想退出执行时无法实现。
  #### 手动传值示例
  ``` javascript
  new Promise((resolve,reject) => {
@@ -133,3 +132,19 @@ new Promise((resolve,reject) => {
 2
 4
  ```
+问题:不易中途中止链式执行。即：当开始执行promise.then，无论成功与否都会继续链式执行，但当失败中间想退出执行时无法实现。
+如何解决：通过catch做，catch可以捕获之前的promise调用链中的任一错误，可以中止后续执行
+``` javascript
+new Promise((resolve,reject) => {
+  reject('失败')
+}).then(()=>{
+   console.log(1)
+}).then(()=>{
+   console.log(3)
+}).catch(err => {
+  console.log(err)
+})
+
+//执行结果：
+失败
+```
