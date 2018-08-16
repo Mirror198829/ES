@@ -14,7 +14,7 @@ let pFn = new Promise( (resolve,reject) => {
     }else{
       reject('失败：我是promise中reject的结果')
     }
-  },2000)
+  },7000)
 })
 console.log('准备调用promise')
 pFn.then( value => {
@@ -44,6 +44,24 @@ allDone.then(res => {
   console.error(error)
 })
 console.log('调用promise.all结束')
+
+new Promise((resolve,reject) => {
+  resolve()
+}).then(
+  ()=>{
+    console.log(1)
+  },
+  ()=>{
+    console.log(2)
+  }
+).then(
+  ()=>{
+    console.log(3)
+  },
+  ()=>{
+    console.log(4)
+  }
+)
 </script>
 </body>
 </html>
