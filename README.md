@@ -180,6 +180,6 @@ function getValue(num){
     },1000)
   })
 }
-fn()
+fn() // 3 9 传入值不符合规范
 ```
 
