@@ -1,6 +1,7 @@
 # promise
 ## 概念
-ES6中新增的异步编程解决方案，可以通过Promise构造函数实例化
+ES6中新增的异步编程解决方案，可以通过Promise构造函数实例化。  
+解决的问题：ES5中回调地狱。即：异步函数A执行完，回调执行B，B执行完回调C……。promise解决了异步操作和回调的问题。
 ## 三种状态
 ``` javascript
 new Promise(cb)
