@@ -149,7 +149,7 @@ new Promise((resolve,reject) => {
 失败
 ```
 ***
-# ES7——async/await
+# ES8——async/await
 异步函数，`async/await`关键字，`async`就是异步，`await`是等待，使用`async function`即可定义一个异步函数。 
 使用 async / await, 搭配 promise, 可以通过编写形似同步的代码来处理异步流程, 提高代码的简洁性和可读性。
 ``` javascript
@@ -180,6 +180,6 @@ function getValue(num){
     },1000)
   })
 }
-fn()
+fn() // 3 9 传入值不符合规范
 ```
 
