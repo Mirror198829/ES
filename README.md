@@ -2,6 +2,22 @@
 ## 概念
 ES6中新增的异步编程解决方案，可以通过Promise构造函数实例化。  
 解决的问题：ES5中回调地狱。即：异步函数A执行完，回调执行B，B执行完回调C……。promise解决了异步操作和回调的问题。
+##### 回调地狱 示例
+``` javascript
+function asynFn(num, cb) {
+    console.log('开始执行异步函数')
+    setTimeout(() => {
+        console.log(num)
+        cb()
+    }, 1000)
+    console.log('asynFn函数执行完毕')
+}
+asynFn(1, () => {
+    asynFn(2, () => {
+        asynFn(3, () => {})
+    })
+})
+```
 ## 三种状态
 ``` javascript
 new Promise(cb)
