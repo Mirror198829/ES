@@ -67,9 +67,79 @@ console.log('调用promise结束')
  
  -- 当其中一个被rejected，Promise.all的状态就会变成rejected  
  -- 第一个被rejected实例的返回值会传递给回调函数
+ 
+  ***
+ 
  ## promise.then 串行操作
+  ### 任务链
+ ``` javascript
+new Promise((resolve,reject) => {
+  resolve()
+}).then(
+  ()=>{
+    console.log(1)
+  },
+  ()=>{
+    console.log(2)
+  }
+).then(
+  ()=>{
+    console.log(3)
+  },
+  ()=>{
+    console.log(4)
+  }
+)
+ ```
+ then函数执行后继续执行then……  
+ then函数执行后会返回一个新的Promise对象
+ * 如果第1个then没有传入处理函数：返回一个继承了上一个处理状态的Promise对象
+ * 如果第1个then传入函数：默认返回一个fulfilled/resolved状态的Promise对象
+ * 如果第1个then传入函数:手动处理 ，通过处理函数显示的return一个新的promise对象
  
- 
+ #### 手动传值示例
+ ``` javascript
+ new Promise((resolve,reject) => {
+  reject()
+}).then(
+  ()=>{
+    console.log(1)
+  },
+  ()=>{
+    console.log(2)
+    return newPromise((resolve,reject)=>{
+      reject()
+    })
+  }
+).then(
+  ()=>{
+    console.log(3)
+  },
+  ()=>{
+    console.log(4)
+  }
+)
+
+//执行结果：
+2
+4
+ ```
+问题:不易中途中止链式执行。即：当开始执行promise.then，无论成功与否都会继续链式执行，但当失败中间想退出执行时无法实现。
+如何解决：通过catch做，catch可以捕获之前的promise调用链中的任一错误，可以中止后续执行
+``` javascript
+new Promise((resolve,reject) => {
+  reject('失败')
+}).then(()=>{
+   console.log(1)
+}).then(()=>{
+   console.log(3)
+}).catch(err => {
+  console.log(err)
+})
+
+//执行结果：
+失败
+```
  ## promise.all 并发操作
  #### 等待所有都执行完成
  ### 示例
@@ -143,76 +213,6 @@ Promise.race([f1,f2,f3]).then((val)=>{
     console.log(val) //执行结果：f2,执行2秒
 })
   ```
- ***
- ### 任务链
- ``` javascript
-new Promise((resolve,reject) => {
-  resolve()
-}).then(
-  ()=>{
-    console.log(1)
-  },
-  ()=>{
-    console.log(2)
-  }
-).then(
-  ()=>{
-    console.log(3)
-  },
-  ()=>{
-    console.log(4)
-  }
-)
- ```
- then函数执行后继续执行then……  
- then函数执行后会返回一个新的Promise对象
- * 如果第1个then没有传入处理函数：返回一个继承了上一个处理状态的Promise对象
- * 如果第1个then传入函数：默认返回一个fulfilled/resolved状态的Promise对象
- * 如果第1个then传入函数:手动处理 ，通过处理函数显示的return一个新的promise对象
- 
- #### 手动传值示例
- ``` javascript
- new Promise((resolve,reject) => {
-  reject()
-}).then(
-  ()=>{
-    console.log(1)
-  },
-  ()=>{
-    console.log(2)
-    return newPromise((resolve,reject)=>{
-      reject()
-    })
-  }
-).then(
-  ()=>{
-    console.log(3)
-  },
-  ()=>{
-    console.log(4)
-  }
-)
-
-//执行结果：
-2
-4
- ```
-问题:不易中途中止链式执行。即：当开始执行promise.then，无论成功与否都会继续链式执行，但当失败中间想退出执行时无法实现。
-如何解决：通过catch做，catch可以捕获之前的promise调用链中的任一错误，可以中止后续执行
-``` javascript
-new Promise((resolve,reject) => {
-  reject('失败')
-}).then(()=>{
-   console.log(1)
-}).then(()=>{
-   console.log(3)
-}).catch(err => {
-  console.log(err)
-})
-
-//执行结果：
-失败
-```
 ***
 # ES8——async/await
 异步函数，`async/await`关键字，`async`就是异步，`await`是等待，使用`async function`即可定义一个异步函数。 
