@@ -67,6 +67,9 @@ console.log('调用promise结束')
  
  -- 当其中一个被rejected，Promise.all的状态就会变成rejected  
  -- 第一个被rejected实例的返回值会传递给回调函数
+ ## promise.then 串行操作
+ 
+ 
  ## promise.all 并发操作
  #### 等待所有都执行完成
  ### 示例
