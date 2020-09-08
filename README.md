@@ -51,7 +51,8 @@ console.log('调用promise结束')
  
  -- 当其中一个被rejected，Promise.all的状态就会变成rejected  
  -- 第一个被rejected实例的返回值会传递给回调函数
- ## promise.all示例
+ ## promise.all 并发操作
+ ### 示例
  ``` javascript
  function loadNum(num,time){
   let numRes = new Promise((resolve,reject) => {
@@ -78,6 +79,17 @@ console.log('调用promise.all结束')
 调用promise.all开始
 调用promise.all结束
 all：我是promise.all中reject的结果
+ ```
+ ``` javascript
+const p1 = Promise.resolve(1)
+const p2 = Promise.resolve(20)
+const p3 = Promise.resolve(3)
+
+Promise.all([p1,p2,p3]).then((val) => {
+    console.log(val)
+})
+
+//执行结果：(3) [1, 20, 3]
  ```
  ***
  ### 任务链
