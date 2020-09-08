@@ -52,6 +52,7 @@ console.log('调用promise结束')
  -- 当其中一个被rejected，Promise.all的状态就会变成rejected  
  -- 第一个被rejected实例的返回值会传递给回调函数
  ## promise.all 并发操作
+ #### 等待所有都执行完成
  ### 示例
  ``` javascript
 const p1 = Promise.resolve(1)
@@ -105,6 +106,24 @@ console.log('调用promise.all结束')
 调用promise.all结束
 all：我是promise.all中reject的结果
  ```
+  ## promise.race 竞争操作
+  #### 先到先得
+  ``` javascript
+  function fn(txt,time){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            resolve(txt)
+        },time)
+    })
+}
+const f1 = fn('f1,执行3秒',3000)
+const f2 = fn('f2,执行2秒',2000)
+const f3 = fn('f3,执行5秒',5000)
+
+Promise.race([f1,f2,f3]).then((val)=>{
+    console.log(val) //执行结果：f2,执行2秒
+})
+  ```
  ***
  ### 任务链
  ``` javascript
