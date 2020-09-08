@@ -54,6 +54,31 @@ console.log('调用promise结束')
  ## promise.all 并发操作
  ### 示例
  ``` javascript
+const p1 = Promise.resolve(1)
+const p2 = Promise.resolve(20)
+const p3 = Promise.resolve(3)
+
+Promise.all([p1,p2,p3]).then((val) => {
+    console.log(val)
+}) //执行结果：(3) [1, 20, 3]
+ ```
+ ``` javascript
+ function fn(txt,time){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            resolve(txt)
+        },time)
+    })
+}
+const f1 = fn('f1,执行3秒',3000)
+const f2 = fn('f2,执行2秒',2000)
+const f3 = fn('f3,执行5秒',5000)
+
+Promise.all([f1,f2,f3]).then((val)=>{
+    console.log(val)
+})   //执行结果：(3) ["f1,执行3秒", "f2,执行2秒", "f3,执行5秒"]
+ ```
+  ``` javascript
  function loadNum(num,time){
   let numRes = new Promise((resolve,reject) => {
   setTimeout(() => {
@@ -79,17 +104,6 @@ console.log('调用promise.all结束')
 调用promise.all开始
 调用promise.all结束
 all：我是promise.all中reject的结果
- ```
- ``` javascript
-const p1 = Promise.resolve(1)
-const p2 = Promise.resolve(20)
-const p3 = Promise.resolve(3)
-
-Promise.all([p1,p2,p3]).then((val) => {
-    console.log(val)
-})
-
-//执行结果：(3) [1, 20, 3]
  ```
  ***
  ### 任务链
