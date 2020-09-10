@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>promise.all</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        /* const p1 = Promise.resolve(1)
+const p2 = Promise.resolve(20)
+const p3 = Promise.resolve(3)
+
+Promise.all([p1,p2,p3]).then((val) => {
+    console.log(val)
+}) */
+
+        /* function fn(){
+            console.log('回调函数执行')
+        }
+        function asynFn(cb){
+            console.log('开始执行异步函数')
+            setTimeout(()=>{
+                cb()
+            },1000)
+            console.log('asynFn函数执行完毕')
+        } */
+        function asynFn(num, cb) {
+            console.log('开始执行异步函数')
+            setTimeout(() => {
+                console.log(num)
+                cb()
+            }, 1000)
+            console.log('asynFn函数执行完毕')
+        }
+        asynFn(1, () => {
+            asynFn(2, () => {
+                asynFn(3, () => {})
+            })
+        })
+    </script>
+</body>
+
+</html>

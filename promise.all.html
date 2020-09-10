@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>promise.all</title>
+</head>
+<body>
+<script type="text/javascript">
+/* const p1 = Promise.resolve(1)
+const p2 = Promise.resolve(20)
+const p3 = Promise.resolve(3)
+
+Promise.all([p1,p2,p3]).then((val) => {
+    console.log(val)
+}) */
+
+function fn(txt,time){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            resolve(txt)
+        },time)
+    })
+}
+const f1 = fn('f1,执行3秒',3000)
+const f2 = fn('f2,执行2秒',2000)
+const f3 = fn('f3,执行5秒',5000)
+
+Promise.all([f1,f2,f3]).then((val)=>{
+    console.log(val)
+})
+</script>
+</body>
+</html>
