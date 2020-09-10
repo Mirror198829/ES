@@ -215,8 +215,20 @@ Promise.race([f1,f2,f3]).then((val)=>{
   ```
 ***
 # ES8——async/await
-异步函数，`async/await`关键字，`async`就是异步，`await`是等待，使用`async function`即可定义一个异步函数。 
-使用 async / await, 搭配 promise, 可以通过编写形似同步的代码来处理异步流程, 提高代码的简洁性和可读性。
+1. `async/await`是`promise`的语法糖。使用 async / await, 搭配 promise, 可以通过编写形似同步的代码来处理异步流程, 提高代码的简洁性和可读性。  
+2. 异步函数，`async/await`关键字，`async`就是异步，`await`是等待，使用`async function`即可定义一个异步函数。 
+
+> async
+1. 申明异步函数，返回promise对象
+
+> await  
+1. 表达式。如果是值(如字符串、数字、普通对象等等)的话，返回值就是本身的值。
+2. 不过最常用的是后面跟一个promise对象。await会等待这个promise的状态由pending转为fulfilled或者rejected。在此期间它会阻塞，延迟执行await语句后面的语句。
+3. 如果promise对象的结果是resolve，它会将resolve的值，作为await表达式的运算结果。
+
+> 应用场景  
+调用应用详情接口，需要应用Id和租户Id。但这两个Id也需要分别调用2个接口得到。
+
 ``` javascript
 //await is only valid in async function
 //await/async的写法更加简洁
