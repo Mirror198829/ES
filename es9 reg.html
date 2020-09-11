@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+<script type="text/javascript">
+const t = '2019-06-07'.match(/(\d{4})-(\d{2})-(\d{2})/)
+console.log(t) //["2019-06-07", "2019", "06", "07", index: 0, input: "2019-06-07", groups: undefined]
+console.log(t[1]) //2019
+console.log(t[2]) //06
+console.log(t[3]) //07
+
+const t1 = '2019-06-07'.match(/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/)
+console.log(t1)//["2019-06-07", "2019", "06", "07", index: 0, input: "2019-06-07", groups: {…}]
+console.log(t1.groups.year) //2019
+console.log(t1.groups.month)//06
+console.log(t1.groups.day)//07
+</script>
+</body>
+
+</html>

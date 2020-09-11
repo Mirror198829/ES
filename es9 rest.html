@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+<script type="text/javascript">
+let obj = {
+    name:'xxx',
+    age:18,
+    id:10,
+    sex:'male',
+    hobby:'dance'
+}
+let {name,id,...rest}=obj
+console.log(name) //'xxx'
+console.log(id) //10
+console.log(rest)//{age: 18, sex: "male", hobby: "dance"}
+</script>
+</body>
+
+</html>
