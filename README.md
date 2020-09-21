@@ -225,6 +225,7 @@ Promise.race([f1,f2,f3]).then((val)=>{
 1. 表达式。如果是值(如字符串、数字、普通对象等等)的话，返回值就是本身的值。
 2. 不过最常用的是后面跟一个promise对象。await会等待这个promise的状态由pending转为fulfilled或者rejected。在此期间它会阻塞，延迟执行await语句后面的语句。
 3. 如果promise对象的结果是resolve，它会将resolve的值，作为await表达式的运算结果。
+4. await只接收resolve状态，reject状态可以通过`try catch`获取
 
 > 应用场景  
 调用应用详情接口，需要应用Id和租户Id。但这两个Id也需要分别调用2个接口得到。
