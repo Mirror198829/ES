@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+<script type="text/javascript">
+// for
+//break 和 continue 可以在for中使用
+let arr1 = [1,2,3,4]
+for(let i=0;i < arr1.length; i++){
+    if(i == 2) break; 
+    console.log(arr1[i]) //1 2
+}
+
+//forEach
+//无法使用break,continue,必须全部循环完
+let arr2 = [1,2,3,4]
+arr2.forEach((item)=>{
+    console.log(item)  //1 2 3 4
+})
+
+//every
+//return false/true去控制程序中止和继续
+let arr3 = [1,2,3,4]
+arr3.every((item) => {   //1 2
+  if(item == 2){
+    console.log(item)
+    return false
+  }else{
+    console.log(item)
+    return true
+  }  
+})
+
+//for in 
+//针对object的遍历,break可以使用
+let arr4 = [1,2,3,4]
+for(let key in arr4){
+    console.log(key) //字符串0，1，2，3
+}
+
+//for of
+//任何类型遍历
+let arr5 = [1,2,3,4]
+for(let value of arr5){
+    console.log(value) //1,2,3,4
+}
+</script>
+</body>
+</html>
